@@ -1,0 +1,9 @@
+Package: @PACKAGE
+Priority: extra
+Version: @MAJOR.@MINOR.@PATCH
+Architecture: amd64
+Installed-Size: @SIZE
+Maintainer: Miguel Calderon <pcmiguel85@gmail.com>
+Depends: @DEPENDS
+Description: @DESCRIPTION
+ Small and simple LISP variant interpreter

@@ -63,31 +63,11 @@ $(OUTPUT): $(OBJS) lisp.cpp
 PACKAGEDEV=$(PACKAGE)-dev
 DEPENDSDEV="$(PACKAGEDEV), $(DEPENDS)"
 
-dist: deb dev
-
-dev:
-	mkdir -p deb/usr/include
-	cp -r include/* deb/usr/include
-
-	mkdir -p deb/DEBIAN
-
-	cat unix/control.in | sed \
-	 -e s/@PACKAGE/${PACKAGEDEV}/g \
-	 -e s/@DESCRIPTION/${DESCRIPTION}/g \
-	 -e s/@MAJOR/${MAJOR}/g \
-	 -e s/@MINOR/${MINOR}/g \
-	 -e s/@PATCH/${PATCH}/g \
-	 -e s/@DEPENDS/${DEPENDSDEV}/g \
-	 -e s/@SIZE/$(shell du -c --apparent-size include/* --exclude=DEBIAN | grep total | sed 's/[ \t]*total//')/g > deb/DEBIAN/control
-
-	mkdir -p dist
-	dpkg -b deb/ dist
-
-	rm -rf deb
+dist: deb
 
 deb: $(OUTPUT)
-	mkdir -p deb/usr/lib/
-	cp $(OUTPUT) deb/usr/lib/
+	mkdir -p deb/bin
+	cp $(OUTPUT) deb/bin
 
 	mkdir -p deb/DEBIAN
 
